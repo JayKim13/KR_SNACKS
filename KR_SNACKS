@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Must-Try Korean Snacks for Gifts</title>
+<script>
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault(); // 마우스 오른쪽 클릭 방지
+  });
+
+  document.addEventListener('keydown', function(e) {
+    // F12, Ctrl+Shift+I (개발자 도구), Ctrl+Shift+C, Ctrl+U (소스 보기) 막기
+    if (
+      e.key === 'F12' ||
+      (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'C')) ||
+      (e.ctrlKey && e.key === 'U')
+    ) {
+      e.preventDefault();
+    }
+  });
+</script>
+
+<style>
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  .page {
+    background-color: yellow;
+    text-align: center;
+    padding: 50px;
+  }
+  .title {
+    font-size: 30px;
+    color: black;
+  }
+  .vending-machine {
+    background-image: url('vending_machine.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .btn {
+    padding: 15px 20px;
+    margin: 10px 0;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 150px;
+  }
+  .btn-sweety,
+  .btn-chewy,
+  .btn-favorite-flavor,
+  .btn-favorite-texture {
+    background-color: #FFC0CB;
+    color: #fff;
+  }
+  .btn-salty,
+  .btn-crispy {
+    background-color: #87CEEB;
+    color: #fff;
+  }
+  .btn-spicy,
+  .btn-gooey {
+    background-color: #FFA07A;
+    color: #fff;
+  }
+  .btn-favorite-flavor,
+  .btn-favorite-texture {
+    background-color: #0000FF;
+    color: #FFFFFF;
+    font-weight: bold;
+  }
+  .favorite-text {
+    position: absolute;
+    bottom: 3cm;
+  }
+  .video-container {
+    width: 50%;
+    margin: 20px auto;
+  }
+  .video {
+    width: 100%;
+    height: auto;
+  }
+  .dropdown {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  .dropdown button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 16px;
+  }
+  .dropdown button:after {
+    content: '▼';
+    font-size: 12px;
+    margin-left: 5px;
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  .dropdown-content a:hover {
+    background-color: #f1f1f1;
+  }
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  .back-button {
+    padding: 10px 20px;
+    margin-top: 20px;
+    border: none;
+    background-color: #FF6347;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+  }
+</style>
+</head>
+<body>
+  <!-- Language Dropdown -->
+  <div class="dropdown">
+    <button>Language</button>
+    <div class="dropdown-content">
+      <a href="#" onclick="translatePage('en')">English</a>
+      <a href="#" onclick="translatePage('ko')">한국어</a>
+      <a href="#" onclick="translatePage('jp')">日本語</a>
+      <a href="#" onclick="translatePage('zh')">中文</a>
+    </div>
+  </div>
+
+  <!-- Video Container -->
+  <div class="video-container">
+    <video class="video" controls>
+      <source src="traveler.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <!-- First Page -->
+  <div id="page1" class="page">
+    <h1 class="title" data-lang-key="title">Must-Try Korean Snacks for Gifts</h1>
+    <div class="vending-machine">
+      <button class="btn btn-sweety" data-lang-key="sweety" onclick="saveInfo('sweety')">Sweety</button>
+      <button class="btn btn-salty" data-lang-key="salty" onclick="saveInfo('salty')">Salty</button>
+      <button class="btn btn-spicy" data-lang-key="spicy" onclick="saveInfo('spicy')">Spicy</button>
+      <button class="btn btn-favorite-flavor" data-lang-key="favoriteFlavor" onclick="showFavorite('flavor')">Favorite Flavor</button>
+    </div>
+  </div>
+
+  <!-- Second Page -->
+  <div id="page2" class="page" style="display: none;">
+    <h1 class="title" data-lang-key="title">Must-Try Korean Snacks for Gifts</h1>
+    <div class="vending-machine">
+      <button class="btn btn-crispy" data-lang-key="crispy" onclick="saveInfo('crispy')">Crispy</button>
+      <button class="btn btn-gooey" data-lang-key="gooey" onclick="saveInfo('gooey')">Gooey</button>
+      <button class="btn btn-chewy" data-lang-key="chewy" onclick="saveInfo('chewy')">Chewy</button>
+      <button class="btn btn-favorite-texture" data-lang-key="favoriteTexture" onclick="showFavorite('texture')">Favorite Texture</button>
+    </div>
+  </div>
+
+  <!-- Third Page -->
+  <div id="page3" class="page" style="display: none;">
+    <h1 class="title" data-lang-key="title">Must-Try Korean Snacks for Gifts</h1>
+    <div id="snack-output" class="vending-machine">
+      <!-- Output will be displayed here -->
+    </div>
+    <button class="back-button" onclick="goBack()">Back to First Page</button>
+  </div>
+
+<script>
+  let firstPageSelection = '';
+  let secondPageSelection = '';
+
+  const translations = {
+    en: {
+      title: 'Must-Try Korean Snacks for Gifts',
+      sweety: 'Sweety',
+      salty: 'Salty',
+      spicy: 'Spicy',
+      favoriteFlavor: 'Favorite Flavor',
+      crispy: 'Crispy',
+      gooey: 'Gooey',
+      chewy: 'Chewy',
+      favoriteTexture: 'Favorite Texture',
+    },
+    ko: {
+      title: '선물하기 좋은 한국 간식',
+      sweety: '달콤한',
+      salty: '짭짤한',
+      spicy: '매운',
+      favoriteFlavor: '좋아하는 맛',
+      crispy: '바삭한',
+      gooey: '쫀득한',
+      chewy: '씹는 맛이 있는',
+      favoriteTexture: '좋아하는 식감',
+    },
+    jp: {
+      title: '贈り物にぴったりの韓国のお菓子',
+      sweety: '甘い',
+      salty: '塩辛い',
+      spicy: '辛い',
+      favoriteFlavor: 'お気に入りの味',
+      crispy: 'サクサク',
+      gooey: 'もちもち',
+      chewy: '噛みごたえのある',
+      favoriteTexture: '好きな食感',
+    },
+    zh: {
+      title: '适合送礼的韩国零食',
+      sweety: '甜的',
+      salty: '咸的',
+      spicy: '辣的',
+      favoriteFlavor: '最喜欢的味道',
+      crispy: '脆的',
+      gooey: '黏的',
+      chewy: '有嚼劲的',
+      favoriteTexture: '喜欢的口感',
+    }
+  };
+
+  function saveInfo(selection) {
+    if (document.getElementById('page1').style.display !== 'none') {
+      firstPageSelection = selection;
+      document.getElementById('page1').style.display = 'none';
+      document.getElementById('page2').style.display = 'block';
+    } else if (document.getElementById('page2').style.display !== 'none') {
+      secondPageSelection = selection;
+      displaySnack();
+      document.getElementById('page2').style.display = 'none';
+      document.getElementById('page3').style.display = 'block';
+    }
+  }
+
+  function displaySnack() {
+    const outputDiv = document.getElementById('snack-output');
+    let snackHTML = '';
+
+    if (firstPageSelection === 'sweety') {
+      switch (secondPageSelection) {
+        case 'crispy':
+          snackHTML = '<img src="허니버터칩.jpeg" alt="허니버터칩" width="200" height="250">';
+          break;
+        case 'gooey':
+          snackHTML = '<img src="삼립호떡.png" alt="삼립호떡" width="200" height="250">';
+          break;
+        case 'chewy':
+          snackHTML = '<img src="초코파이.jpeg" alt="초코파이" width="200" height="250">';
+          break;
+        default:
+          break;
+      }
+    } else if (firstPageSelection === 'salty') {
+      switch (secondPageSelection) {
+        case 'crispy':
+          snackHTML = '<img src="꼬깔콘.jpg" alt="꼬깔콘" width="200" height="250">';
+          break;
+        case 'gooey':
+          snackHTML = '<img src="푸하하_소금우유_크림빵.jpg" alt="푸하하_소금우유_크림빵" width="200" height="250">';
+          break;
+        case 'chewy':
+          snackHTML = '<img src="질러육포.jpeg" alt="질러육포" width="200" height="250">';
+          break;
+        default:
+          break;
+      }
+    } else if (firstPageSelection === 'spicy') {
+      switch (secondPageSelection) {
+        case 'crispy':
+          snackHTML = '<img src="신당동 떡볶이.jpeg" alt="신당동 떡볶이" width="200" height="250">';
+          break;
+        case 'gooey':
+          snackHTML = '<img src="불닭볶음면.jpeg" alt="불닭볶음면" width="200" height="250">';
+          break;
+        case 'chewy':
+          snackHTML = '<img src="우리동네 떡볶이.png" alt="우리동네 떡볶이" width="200" height="250">';
+          break;
+        default:
+          break;
+      }
+    }
+
+    outputDiv.innerHTML = `<p>${snackHTML}</p>`;
+  }
+
+  function showFavorite(type) {
+    const outputDiv = document.getElementById('snack-output');
+    let favoriteText = '';
+
+    if (type === 'flavor') {
+      favoriteText = 'Favorite Flavor';
+    } else if (type === 'texture') {
+      favoriteText = 'Favorite Texture';
+    }
+
+    outputDiv.innerHTML = `<p>${favoriteText}</p>`;
+  }
+
+  function goBack() {
+    document.getElementById('page3').style.display = 'none';
+    document.getElementById('page2').style.display = 'none';
+    document.getElementById('page1').style.display = 'block';
+  }
+
+  function translatePage(language) {
+    const elementsToTranslate = document.querySelectorAll('[data-lang-key]');
+    elementsToTranslate.forEach(function(el) {
+      const key = el.getAttribute('data-lang-key');
+      el.textContent = translations[language][key];
+    });
+  }
+</script>
+</body>
+</html>
